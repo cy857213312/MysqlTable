@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="application/msword"/>
+    <title>index</title>
+    <style type="text/css">
+        .bg {
+            background-color: rgb(84, 127, 177);
+            width: 800px;
+            text-align:center;
+        }
+
+        table {
+            table-layout: fixed;
+        }
+
+        tr {
+            height: 20px;
+            font-size: 20px;
+            text-align:center;
+        }
+
+        td {
+            overflow: hidden;
+            word-break: break-all;
+            word-wrap: break-word;
+
+        }
+
+        .specialHeight {
+            height: 40px;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+</head>
+
+<body>
+
+
+<div style="width:800px; margin: 0 auto">
+    <div th:each="table:${results}" style="font-size: 25px;width: 100%;" >
+        <!--这个是类的说明-->
+        <h4  th:text="${table.getChineseName()}" style=" text-align:center;"></h4>
+        <!--这个是每个请求的说明，方便生成文档后进行整理-->
+        <table border="1" cellspacing="1" cellpadding="0" width="100%;" >
+
+            <tr style="width: 100%;">
+                <td>中文名称</td>
+                <td colspan="5"  th:text="${table.getChineseName()}"></td>
+            </tr>
+            <tr>
+                <td>物理表名</td>
+                <td colspan="5" id="tableUrl" th:text="${table.getPhysicalName()}"></td>
+            </tr>
+            <tr>
+                <td>主键</td>
+                <td colspan="5" th:text="${table.getPrimaryKey()}"></td>
+            </tr>
+            <tr>
+                <td>索引</td>
+                <td colspan="5" th:text="${table.getIndexes()}"></td>
+            </tr>
+            <tr>
+                <td>所属数据库</td>
+                <td colspan="5" th:text="${table.getDatabase()}"></td>
+            </tr>
+
+            <tr class="bg" align="center">
+                <td>列名</td>
+                <td>数据类型</td>
+                <td>长度</td>
+                <td>是否为空</td>
+                <td>默认值</td>
+                <td>备注</td>
+            </tr>
+
+            <tr align="center" th:each="request:${table.getTable()}">
+                <td th:text="${request.getColumnName()}"></td>
+                <td th:text="${request.getDataType()}"></td>
+                <td th:text="${request.getLength()}"></td>
+                <td th:text="${request.getIsNull()}"></td>
+                <td th:text="${request.getDefaultValue()}"></td>
+                <td th:text="${request.getNote()}"></td>
+            </tr>
+
+
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+
+
+</script>
+</body>
+
+</html>
