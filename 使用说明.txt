@@ -2,4 +2,4 @@
 将database.name改成自己的数据库名
 即可
 
-直接访问 : http://localhost:8080/
+直接访问 : http://localhost:8080/allTableName
